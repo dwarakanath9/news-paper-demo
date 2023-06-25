@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: news-paper-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: news-paper-demo
+  template:
+    metadata:
+      labels:
+        app: news-paper-demo
+    spec:
+      containers:
+        - name: springboot
+          image: dwarak1262/news-paper-demo:news-paper-demo
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: news-paper-demo
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: news-paper-demo
