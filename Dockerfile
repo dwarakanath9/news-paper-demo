@@ -1,8 +1,7 @@
-FROM openjdk:11
-ARG JAR_FILE=build/libs/*.jar
-COPY ${JAR_FILE} app.jar
+FROM openjdk:11-jre-slim
 
-RUN mkdir destination-dir-for-add
-ADD sample.tar.gz /destination-dir-for-add
+WORKDIR /app
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+COPY target/my-app.jar app.jar
+
+CMD ["java", "-jar", "app.jar"]
