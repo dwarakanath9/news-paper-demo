@@ -25,13 +25,7 @@ public class NewsPaperServiceImpl implements NewspaperService{
             if (response.getStatusCode().is2xxSuccessful()) {
                 NewspaperResponse newspaperResponse = response.getBody();
                 if (newspaperResponse != null) {
-                    return newspaperResponse.getNewspapers().stream().map(r -> {
-                         r.setCountry("USA");
-                         r.setRevenue(new Random().nextFloat(90000)+1000);
-                         r.setAudienceCount(new Random().nextLong(90000)+2000);
-                         r.setLanguage("English");
-                         return r;
-                     }).collect(Collectors.toList());
+                    return newspaperResponse.getNewspapers();
                 }
             }
         } catch (HttpClientErrorException ex) {
