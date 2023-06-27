@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: dwarak1262/news-paper-demo:news-paper-demo
+          image: public.ecr.aws/b1q3n2s0/jenkins-eks
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
