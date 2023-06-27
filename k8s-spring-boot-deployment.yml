@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: news-paper-demo
+  name: my-springboot-deployment
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: news-paper-demo
@@ -13,23 +13,26 @@ spec:
         app: news-paper-demo
     spec:
       containers:
-        - name: springboot
-          image: public.ecr.aws/b1q3n2s0/jenkins-eks
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          env:
-            - name: PORT
-              value: "8080"
+      - name: my-springboot-app
+        image: public.ecr.aws/b1q3n2s0/jenkins-eks
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8085
+# service type loadbalancer       
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: news-paper-demo
+    k8s-app: news-paper-demo
   name: news-paper-demo
 spec:
-  type: LoadBalancer
   ports:
-    - port: 80
-      targetPort: 8080
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8085
+  type: LoadBalancer
   selector:
     app: news-paper-demo
