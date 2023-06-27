@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.news</groupId>
 	<artifactId>news-paper-demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>news-paper-demo</name>
 	<description>get all US News Papers List</description>
 	<properties>
