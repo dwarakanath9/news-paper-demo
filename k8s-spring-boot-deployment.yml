@@ -15,7 +15,11 @@ spec:
       containers:
       - name: my-springboot-app
         image: public.ecr.aws/b1q3n2s0/jenkins-eks
-        imagePullPolicy: Always
+        imagePullPolicy: Never
+        resources:
+          requests:
+            cpu: 100m
+        command: ["/bin/sh"]
         ports:
         - containerPort: 8085
 # service type loadbalancer       
