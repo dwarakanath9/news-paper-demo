@@ -1,42 +1,36 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # Kubernetes resource kind we are creating
 metadata:
-  name: my-springboot-deployment
+  name: spring-boot-k8s-deployment
 spec:
-  replicas: 4
   selector:
     matchLabels:
-      app: news-paper-demo
+      app: spring-boot-k8s
+  replicas: 2 # Number of replicas that will be created for this deployment
   template:
     metadata:
       labels:
-        app: news-paper-demo
+        app: spring-boot-k8s
     spec:
       containers:
-      - name: my-springboot-app
-        image: public.ecr.aws/b1q3n2s0/jenkins-eks
-        imagePullPolicy: Never
-        resources:
-          requests:
-            cpu: 100m
-        command: ["/bin/sh"]
-        ports:
-        - containerPort: 8085
-# service type loadbalancer       
+        - name: spring-boot-k8s
+          image: dwarak1262/news-paper-demo # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
+
+
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: news-paper-demo
-    k8s-app: news-paper-demo
-  name: news-paper-demo
+
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: springboot-k8ssvc
 spec:
-  ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: 8085
-  type: LoadBalancer
   selector:
     app: news-paper-demo
+  ports:
+    - protocol: "TCP"
+      port: 8080 # The port that the service is running on in the cluster
+      targetPort: 8080 # The port exposed by the service
+  type: NodePort # type of the service.
