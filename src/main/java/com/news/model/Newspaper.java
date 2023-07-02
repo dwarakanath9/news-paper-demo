@@ -16,7 +16,7 @@ public class Newspaper {
     private String state;
     private String title;
     private String language;
-    private Long audienceCount;
+    private String audienceCount;
     private String country;
-    private Float revenue;
+    private String revenue;
 }

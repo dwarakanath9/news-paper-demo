@@ -27,8 +27,8 @@ public class NewsPaperServiceImpl implements NewspaperService{
                 if (newspaperResponse != null) {
                     return newspaperResponse.getNewspapers().stream().map(r -> {
                          r.setCountry("USA");
-                         r.setRevenue(new Random().nextFloat(90000)+1000);
-                         r.setAudienceCount(new Random().nextLong(90000)+2000);
+                         r.setRevenue(String.valueOf(new Random().nextInt(90000)+1000f));
+                         r.setAudienceCount(String.valueOf(new Random().nextInt(90000)+2000l));
                          r.setLanguage("English");
                          return r;
                      }).collect(Collectors.toList());
