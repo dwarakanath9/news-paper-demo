@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-k8s
-          image: dwarak1262/news-paper-demo-kube # Image that will be used to containers in the cluster
+          image: dwarak1262/news-paper-demo-kube1 # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
@@ -28,7 +28,7 @@ metadata: # Metadata of the resource kind we are creating
   name: springboot-k8ssvc
 spec:
   selector:
-    app: news-paper-demo-kube
+    app: spring-boot-k8s
   ports:
     - protocol: "TCP"
       port: 8080 # The port that the service is running on in the cluster
