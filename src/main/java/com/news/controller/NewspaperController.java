@@ -28,7 +28,7 @@ public class NewspaperController {
 
     @GetMapping()
     public String sayhello() {
-        return "Hello from kubernates cluster 1.0";
+        return "Hello from kubernates cluster 1.0 just for building ";
     }
 
 }
